@@ -4,6 +4,7 @@ package org.example.jwt.Config;
 import org.example.jwt.Filter.JwtFilter;
 import org.example.jwt.Service.UserDetailsServices;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.auditing.config.AuditingConfiguration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,7 +48,7 @@ public class SecurityConfig {
 
 
     @Bean
-    public  PasswordEncoder passwordEncoder(){
+    public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
