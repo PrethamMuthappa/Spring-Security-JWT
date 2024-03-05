@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class AuthService {
     protected final Userrepos userrepos;
 
-    private PasswordEncoder passwordEncoder;
+    protected PasswordEncoder passwordEncoder;
 
     protected final JwtService jwtService;
 

@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-    protected  final UserDetailsServices userDetailsServices;
+    protected final UserDetailsServices userDetailsServices;
     protected final JwtFilter jwtFilter;
 
     public SecurityConfig(UserDetailsServices userDetailsServices, JwtFilter jwtFilter) {
@@ -36,19 +36,19 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
-                        req->req.requestMatchers("/login/**","/register/**")
+                        req -> req.requestMatchers("/login/**", "/register/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated()
                 ).userDetailsService(userDetailsServices)
-                .sessionManagement(sessio->sessio.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(sessio -> sessio.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
 
     @Bean
-    public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -56,7 +56,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
-
 
 }
 
